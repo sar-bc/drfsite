@@ -21,13 +21,14 @@ from django.conf.urls.static import static
 from rest_framework import routers
 from women.views import *
 
-router = routers.SimpleRouter()
-router.register(r'women', WomenViewSet)
+# router = routers.SimpleRouter()
+router = routers.DefaultRouter()
+router.register(r'women', WomenViewSet, basename='women')
+print(router.urls)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/womenlist/', WomenViewSet.as_view({'get': 'list'})),
-    path('api/v1/womenlist/<int:pk>/', WomenViewSet.as_view({'put': 'update'})),
+    path('api/v1/', include(router.urls)),
 ]
 
 if settings.DEBUG:
