@@ -44,5 +44,45 @@ class CategoryAdmin(admin.ModelAdmin):
         return render(request, "admin/csv_uploader.html", data)
 
 
+class WomenAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("title",)}
+
+    def get_urls(self):
+        urls = super().get_urls()
+        new_urls = [path("upload-csv-women/", self.upload_csv)]
+        return new_urls + urls
+
+    def upload_csv(self, request):
+        if request.method == "POST":
+            csv_file = request.FILES['csv_uploader']
+
+            if not csv_file.name.endswith('.csv'):
+                messages.warning(request, 'Ошибочный тип файла')
+                return redirect('.')
+
+            file_data = csv_file.read().decode("utf-8")
+            csv_data = file_data.split("\n")
+            print(csv_data)
+            for x in csv_data:
+                fields = x.split(",")
+                # if len(fields) > 5:
+                #     created = Women.objects.update_or_create(
+                #         id=fields[0],
+                #         title=fields[1],
+                #         content=fields[2],
+                #         photo=fields[3],
+                #         is_published=fields[4],
+                #         cat=fields[5],
+                #     )
+                # else:
+                #     print("Недостаточно полей в строке:", x)
+            messages.success(request, "Файл успешно импортирован")
+            return redirect('admin:index')
+
+        form = CsvImportForm()
+        data = {"form": form}
+        return render(request, "admin/csv_uploader.html", data)
+
+
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Women)
+admin.site.register(Women, WomenAdmin)

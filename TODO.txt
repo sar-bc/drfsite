@@ -1,0 +1,5 @@
+список женщин (GET, POST)
+/api/v1/womenlist/
+
+details women (GET,PUT,DELETE)
+/api/v1/womendetail/1/
