@@ -24,7 +24,7 @@ from women.views import *
 # router = routers.SimpleRouter()
 router = routers.DefaultRouter()
 router.register(r'women', WomenViewSet, basename='women')
-print(router.urls)
+# print(router.urls)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
