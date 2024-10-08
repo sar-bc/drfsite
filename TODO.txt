@@ -1,5 +1,5 @@
 список женщин (GET, POST)
-/api/v1/womenlist/
+/api/v1/women/
 
 details women (GET,PUT,DELETE)
-/api/v1/womendetail/1/
+/api/v1/women/1/
