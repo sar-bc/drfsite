@@ -33,7 +33,11 @@ password --
 }
 Посещение страниц с токеном
 GET http://127.0.0.1:8000/api/v1/women/1/ просмотр одной записи
-в заголовке Headers прописываем Authorization значение Token d407fdf793d234e19bf37776600edfb27bedda09 слово Token
+в заголовке Headers прописываем Authorization значение (Token d407fdf793d234e19bf37776600edfb27bedda09) слово Token
 обязятелен
 
+ВЫХОД:
+POST http://127.0.0.1:8000/auth/token/logout/
+в заголовке Headers прописываем Authorization значение (Token d407fdf793d234e19bf37776600edfb27bedda09) слово Token
+обязятелен
 
