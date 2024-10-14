@@ -15,20 +15,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
 from women.views import *
 
-# router = routers.SimpleRouter()
-router = routers.DefaultRouter()
-router.register(r'women', WomenViewSet, basename='women')
+# # router = routers.SimpleRouter()
+# router = routers.DefaultRouter()
+# router.register(r'women', WomenViewSet, basename='women')
 # print(router.urls)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(router.urls)),
+    path('api/v1/auth/', include('djoser.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
+    path('api/v1/drf-auth/', include('rest_framework.urls')),
+    path('api/v1/women/', WomenAPIList.as_view()),
+    path('api/v1/women/<int:pk>/', WomenAPIUpdate.as_view()),
+    path('api/v1/womendelete/<int:pk>/', WomenAPIDestroy.as_view()),
+    # path('api/v1/', include(router.urls)),
 ]
 
 if settings.DEBUG:

@@ -1,5 +1,39 @@
+https://www.youtube.com/watch?v=Ur24Ms-MD5k&list=PLA0M1Bcd0w8xZA3Kl1fYmOH_MfLpiYMRs&index=9&ab_channel=selfedu
+Уроки 1,2,3,4,5,6,7,8,9,10,11,12
 список женщин (GET, POST)
 /api/v1/women/
 
 details women (GET,PUT,DELETE)
 /api/v1/women/1/
+
+список категорий
+/api/v1/women/1/category/
+
+
+Регистрация:
+POST http://127.0.0.1:8000/api/v1/auth/users/
+поля
+username --
+password ---
+email --
+при успехе вернется
+{
+    "email": "email",
+    "username": "user",
+    "id": 2
+}
+Авторизация (получение токена):
+POST http://127.0.0.1:8000/auth/token/login/
+поля
+username --
+password --
+ответ
+{
+    "auth_token": "d407fdf793d234e19bf37776600edfb27bedda09"
+}
+Посещение страниц с токеном
+GET http://127.0.0.1:8000/api/v1/women/1/ просмотр одной записи
+в заголовке Headers прописываем Authorization значение Token d407fdf793d234e19bf37776600edfb27bedda09 слово Token
+обязятелен
+
+
